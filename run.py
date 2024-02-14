@@ -33,8 +33,7 @@ class App:
         self.pdf_files = []
 
     def run(self):
-        for t in self.config.tilemaps:
-            self.make_tilemap(t)
+        self.make_tilemap()
 
         if self.config.openfile:
             self.open_generated_pdfs()
@@ -50,38 +49,39 @@ class App:
         c.setFillColorRGB(*self.colors[value])
         c.rect(x0 + x * s, y0 + y * s, w * s, h * s, fill=1)
 
-    def make_tilemap(self, name):
-        pdf_file = os.path.join(self.config.pdf_folder, name + '.pdf')
-        csv_file = os.path.join(self.config.csv_folder, name + '.csv')
+    def make_tilemap(self):
+        for csv_file in os.listdir(self.config.csv_folder):
+            if csv_file.endswith('.csv'):
+                pdf_file_name = os.path.splitext(csv_file)[0] + '.pdf'
+                pdf_file = os.path.join(self.config.pdf_folder, pdf_file_name)
+                c = canvas.Canvas(pdf_file, bottomup=0)
 
-        c = canvas.Canvas(pdf_file, bottomup=0)
-
-        with open(csv_file, 'r', encoding='latin-1') as f:
-            reader = csv.reader(f)
-            y = 0
-            start = -10000
-            for row in reader:
-                x = 0
-                if row[0] == 'Map':
-                    start = -2
-
-                if row[0] == 'Layout':
+                with open(os.path.join(self.config.csv_folder, csv_file), 'r', encoding='latin-1') as f:
+                    reader = csv.reader(f)
+                    y = 0
                     start = -10000
+                    for row in reader:
+                        x = 0
+                        if row[0] == 'Map':
+                            start = -2
 
-                if start > 0:
-                    for value in row:
-                        if x > 0:
-                            if value == '':
-                                value = '-1'
-                            self.draw_tile(c, x, start, value)
-                        x += 1
-                y += 1
-                start += 1
+                        if row[0] == 'Layout':
+                            start = -10000
 
-        c.showPage()
-        c.save()
+                        if start > 0:
+                            for value in row:
+                                if x > 0:
+                                    if value == '':
+                                        value = '-1'
+                                    self.draw_tile(c, x, start, value)
+                                x += 1
+                        y += 1
+                        start += 1
 
-        self.pdf_files.append(pdf_file)
+                c.showPage()
+                c.save()
+
+                self.pdf_files.append(pdf_file)
 
     def open_generated_pdfs(self):
         for pdf_file in self.pdf_files:
