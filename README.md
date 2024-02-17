@@ -14,5 +14,5 @@ When you got all of that up and running you will need to extract the tilemap fil
 1. Decode these files using your .csv decoder of choice.
 2. Put your decoded .csv file(s) into lib\cr-csv\assets\tilemaps
 3. Run run.py
-4. The pdf file(s) will automatically open, if it's blank then its likely the .csv file is wrong.
+4. The pdf file(s) will automatically open, if it's blank then it's likely the .csv file wasn't decompiled correctly.
 5. The outputted pdf file(s) can be found in dst
