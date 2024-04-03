@@ -1,13 +1,11 @@
 import csv
 import os
-import subprocess
-import re
-import json
-from reportlab.pdfgen import canvas
-from reportlab.lib.units import pica
 
 import yaml
 from box import Box
+from reportlab.lib.units import pica
+from reportlab.pdfgen import canvas
+
 
 class App:
     colors = {
@@ -86,6 +84,7 @@ class App:
     def open_generated_pdfs(self):
         for pdf_file in self.pdf_files:
             os.startfile(pdf_file)
+
 
 if __name__ == '__main__':
     app = App(config_path='./config.yml')
