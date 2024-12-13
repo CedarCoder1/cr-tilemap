@@ -3,7 +3,7 @@ Modified and better documented version of https://github.com/smlbiobot/cr-tilema
 This program visualizes tilemap files from Clash Royale.
 
 # Usage
-First off you will need to be able to decompile .csv files. I used this tutorial on YouTube to achieve my results. https://www.youtube.com/watch?v=e5TMqYpI1Y0
+First off you will need to be able to decompile .csv files. I nowadays use https://github.com/proydakov/supercell_resource_decoder, before this one I used this tutorial on YouTube to achieve my results. https://www.youtube.com/watch?v=e5TMqYpI1Y0
 Corrections, some things are wrong:
 1. The script is stored on https://github.com/jeanbmar/sc-compression/blob/master/examples/decompress.mjs
 2. You need to manually change the download link from node.js to be V12.18.2, like this https://nodejs.org/dist/v12.18.2/node-v12.18.2-x64.msi, for future proofing I uploaded the .msi file for 64x Windows systems to archive.org. https://archive.org/details/node-v12.18.2-x64
